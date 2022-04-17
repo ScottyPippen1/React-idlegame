@@ -1,4 +1,4 @@
-const woodcuttingTreeData = {
+export default {
     trees: [
         {
             type: "Normal Tree",
