@@ -1,43 +1,44 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { ActionContext } from '../Context/ActionContext'
 
 let ChopButton = () => {
-    let [logCount, setLogCount] = useState(0)
-    let [isChopping, setIsChopping] = useState(false)
+    const { logCount, setLogCount } = useContext(ActionContext);
+    const [actionActive, setActionActive] = useState(false)
 
     useEffect(() => {
         //get local storage
-        let logCount = JSON.parse(localStorage.getItem('logCount'));
+        const logCount = JSON.parse(localStorage.getItem('logCount'));
         if (logCount) {
             setLogCount(logCount);
         }
-    }, [])
+    }, [setLogCount])
 
     useEffect(() => {
         let actionTimeout = null
         //save to local storage
         localStorage.setItem('logCount', JSON.stringify(logCount));
-        if (isChopping) {
+        if (actionActive) {
             console.log(logCount)
             actionTimeout = setTimeout(() => {
                 setLogCount(state => state + 1)
-                console.log(isChopping)
+                console.log(actionActive)
             }, 3000)
 
-        } else if (!isChopping) {
+        } else if (!actionActive) {
             clearTimeout(actionTimeout)
         }
         return () => clearTimeout(actionTimeout)
-    }, [logCount, isChopping])
+    }, [logCount, actionActive, setLogCount])
 
-    let resetLogCount = () => {
+    const resetLogCount = () => {
         setLogCount(0);
-        setIsChopping(false)
+        setActionActive(false)
         console.log("reset and stopped")
     };
 
-    let handleToggle = () => {
-        setIsChopping(!isChopping)
-        console.log(!isChopping)
+    const handleToggle = () => {
+        setActionActive(!actionActive)
+        console.log(!actionActive)
     }
 
     return (

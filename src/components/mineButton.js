@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
+import { ActionContext } from '../Context/ActionContext'
 
 let MineButton = () => {
-    let [oreCount, setOreCount] = useState(0)
-    let [isMining, setIsMining] = useState(false)
+    const { oreCount, setOreCount } = useContext(ActionContext);
+    const [actionActive, setActionActive] = useState(false)
 
     useEffect(() => {
         //get local storage
@@ -10,34 +11,34 @@ let MineButton = () => {
         if (oreCount) {
             setOreCount(oreCount);
         }
-    }, [])
+    }, [setOreCount])
 
     useEffect(() => {
         let actionTimeout = null
         //save to local storage
         localStorage.setItem('oreCount', JSON.stringify(oreCount));
-        if (isMining) {
+        if (actionActive) {
             console.log(oreCount)
             actionTimeout = setTimeout(() => {
                 setOreCount(state => state + 1)
-                console.log(isMining)
+                console.log(actionActive)
             }, 3000)
 
-        } else if (!isMining) {
+        } else if (!actionActive) {
             clearTimeout(actionTimeout)
         }
         return () => clearTimeout(actionTimeout)
-    }, [oreCount, isMining])
+    }, [oreCount, actionActive, setOreCount])
 
     let resetOreCount = () => {
         setOreCount(0);
-        setIsMining(false)
+        setActionActive(false)
         console.log("reset and stopped")
     };
 
     let handleToggle = () => {
-        setIsMining(!isMining)
-        console.log(!isMining)
+        setActionActive(!actionActive)
+        console.log(!actionActive)
     }
 
     return (
