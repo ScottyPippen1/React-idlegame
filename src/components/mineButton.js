@@ -37,14 +37,14 @@ let MineButton = () => {
     };
 
     let handleToggle = () => {
-        console.log(!actionActive)
-        if (activeSkill === '') {
+        if (activeSkill !== 'Mining') {
             setActiveSkill('Mining');
             setActionActive(true)
-
+            console.log('Started mining')
         } else {
             setActiveSkill('')
             setActionActive(false)
+            console.log('Stopped mining')
         }
     }
 

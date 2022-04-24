@@ -37,14 +37,14 @@ let ChopButton = () => {
     };
 
     const handleToggle = () => {
-        console.log(!actionActive)
-        if (activeSkill === '') {
+        if (activeSkill !== 'Woodcutting') {
             setActiveSkill('Woodcutting');
             setActionActive(true)
-
+            console.log('Started woodcutting')
         } else {
             setActiveSkill('')
             setActionActive(false)
+            console.log('Stopped woodcutting')
         }
     }
 
