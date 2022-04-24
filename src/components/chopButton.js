@@ -1,9 +1,8 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import { ActionContext } from '../Context/ActionContext'
 
 let ChopButton = () => {
-    const { logCount, setLogCount } = useContext(ActionContext);
-    const [actionActive, setActionActive] = useState(false)
+    const { actionActive, setActionActive, activeSkill, setActiveSkill, logCount, setLogCount } = useContext(ActionContext);
 
     useEffect(() => {
         //get local storage
@@ -17,7 +16,7 @@ let ChopButton = () => {
         let actionTimeout = null
         //save to local storage
         localStorage.setItem('logCount', JSON.stringify(logCount));
-        if (actionActive) {
+        if (actionActive && activeSkill === 'Woodcutting') {
             console.log(logCount)
             actionTimeout = setTimeout(() => {
                 setLogCount(state => state + 1)
@@ -28,17 +27,25 @@ let ChopButton = () => {
             clearTimeout(actionTimeout)
         }
         return () => clearTimeout(actionTimeout)
-    }, [logCount, actionActive, setLogCount])
+    }, [logCount, actionActive, setLogCount, activeSkill])
 
     const resetLogCount = () => {
+        setActiveSkill('');
         setLogCount(0);
         setActionActive(false)
         console.log("reset and stopped")
     };
 
     const handleToggle = () => {
-        setActionActive(!actionActive)
         console.log(!actionActive)
+        if (activeSkill === '') {
+            setActiveSkill('Woodcutting');
+            setActionActive(true)
+
+        } else {
+            setActiveSkill('')
+            setActionActive(false)
+        }
     }
 
     return (
