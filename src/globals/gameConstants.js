@@ -1,4 +1,4 @@
-const skillLevelMilestones =
+export const skillLevelMilestones =
     [
         0, 83, 174, 276, 388, 512, 650, 801, 969,
         1154, 1358, 1584, 1833, 2107, 2411, 2746, 3115, 3523, 3973,
@@ -12,3 +12,36 @@ const skillLevelMilestones =
         5346332, 5902831, 6517253, 7195629, 7944614, 8771558, 9684577, 10692629, 11805606, 13034431
     ]
 
+export const trees =
+    [
+        {
+            type: "Normal Tree",
+            xp: 25,
+            intervalSpeed: 3000
+        },
+        {
+            type: "Oak Tree",
+            xp: 37.5,
+            intervalSpeed: 3500
+        },
+        {
+            type: "Willow Tree",
+            xp: 67.5,
+            intervalSpeed: 4000
+        },
+        {
+            type: "Maple Tree",
+            xp: 100,
+            intervalSpeed: 4500
+        },
+        {
+            type: "Yew Tree",
+            xp: 175,
+            intervalSpeed: 5500
+        },
+        {
+            type: "Magic Tree",
+            xp: 250,
+            intervalSpeed: 7500
+        },
+    ]

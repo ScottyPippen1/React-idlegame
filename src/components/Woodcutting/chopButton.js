@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react"
-import { ActionContext } from '../Context/ActionContext'
+import { ActionContext } from '../../Context/ActionContext'
+import TreeDropdown from '../Woodcutting/treeDropdown'
 
 let ChopButton = () => {
     const { actionActive, setActionActive, activeSkill, setActiveSkill, logCount, setLogCount } = useContext(ActionContext);
@@ -50,6 +51,7 @@ let ChopButton = () => {
 
     return (
         <div>
+            <TreeDropdown />
             <div>{logCount}</div>
             <button onClick={handleToggle}>Chop</button>
             <button onClick={resetLogCount}>Reset</button>

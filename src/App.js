@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ActionContext } from "./Context/ActionContext";
-import ChopButton from "./components/chopButton";
+import ChopButton from "./components/Woodcutting/chopButton";
 import MineButton from "./components/mineButton";
 import Inventory from "./components/inventory";
 
