@@ -1,9 +1,11 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useState } from "react"
 import { ActionContext } from '../../Context/ActionContext'
+import { SelectedTreeContext } from "../../Context/SelectedTreeContext";
 import TreeDropdown from '../Woodcutting/treeDropdown'
 
 let ChopButton = () => {
     const { actionActive, setActionActive, activeSkill, setActiveSkill, logCount, setLogCount } = useContext(ActionContext);
+    const [selectedTree, setSelectedTree] = useState(0)
 
     useEffect(() => {
         //get local storage
@@ -22,13 +24,13 @@ let ChopButton = () => {
             actionTimeout = setTimeout(() => {
                 setLogCount(state => state + 1)
                 console.log(actionActive)
-            }, 3000)
+            }, selectedTree)
 
         } else if (!actionActive) {
             clearTimeout(actionTimeout)
         }
         return () => clearTimeout(actionTimeout)
-    }, [logCount, actionActive, setLogCount, activeSkill])
+    }, [logCount, actionActive, setLogCount, activeSkill, selectedTree])
 
     const resetLogCount = () => {
         setActiveSkill('');
@@ -50,12 +52,14 @@ let ChopButton = () => {
     }
 
     return (
-        <div>
-            <TreeDropdown />
-            <div>{logCount}</div>
-            <button onClick={handleToggle}>Chop</button>
-            <button onClick={resetLogCount}>Reset</button>
-        </div>
+        <SelectedTreeContext.Provider value={{ selectedTree, setSelectedTree }}>
+            <div>
+                <TreeDropdown />
+                <div>{logCount}</div>
+                <button onClick={handleToggle}>Chop</button>
+                <button onClick={resetLogCount}>Reset</button>
+            </div>
+        </SelectedTreeContext.Provider>
     )
 }
 export default ChopButton

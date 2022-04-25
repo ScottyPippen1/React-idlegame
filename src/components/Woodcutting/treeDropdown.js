@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { SelectedTreeContext } from '../../Context/SelectedTreeContext'
 import { trees } from '../../globals/gameConstants'
 
 const TreeDropdown = () => {
-    let [selectedTree, setSelectedTree] = useState('Select a tree')
+    const { selectedTree, setSelectedTree } = useContext(SelectedTreeContext);
 
     let handleTreeChange = (e) => {
         setSelectedTree(e.target.value)
@@ -12,15 +12,13 @@ const TreeDropdown = () => {
 
     return (
         <>
-            <SelectedTreeContext.Provider value={{ selectedTree }}>
-                <div>{selectedTree}</div>
-                <select onChange={handleTreeChange}>
-                    <option value='Select a tree'>
-                        -- Select a tree --
-                    </option>
-                    {trees.map((selectedTree, index) => <option value={index}>{selectedTree.type}</option>)}
-                </select>
-            </SelectedTreeContext.Provider>
+            <div>{selectedTree}</div>
+            <select onChange={handleTreeChange}>
+                <option value='Select a tree'>
+                    -- Select a tree --
+                </option>
+                {trees.map((selectedTree) => <option value={selectedTree.intervalSpeed}>{selectedTree.type}</option>)}
+            </select>
         </>
     )
 }
