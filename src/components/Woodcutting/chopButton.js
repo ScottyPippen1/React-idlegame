@@ -5,7 +5,7 @@ import TreeDropdown from '../Woodcutting/treeDropdown'
 
 let ChopButton = () => {
     const { actionActive, setActionActive, activeSkill, setActiveSkill, logCount, setLogCount } = useContext(ActionContext);
-    const [selectedTree, setSelectedTree] = useState(0)
+    const [selectedTree, setSelectedTree] = useState('Select a tree')
 
     useEffect(() => {
         //get local storage
@@ -40,6 +40,10 @@ let ChopButton = () => {
     };
 
     const handleToggle = () => {
+        if (selectedTree === 'Select a tree') {
+            alert('Please select a tree')
+            return
+        }
         if (activeSkill !== 'Woodcutting') {
             setActiveSkill('Woodcutting');
             setActionActive(true)
