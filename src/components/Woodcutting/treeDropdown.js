@@ -7,7 +7,7 @@ const TreeDropdown = () => {
 
     let handleTreeChange = (e) => {
         setSelectedTree(e.target.value)
-        console.log(selectedTree)
+        console.log(e.target.value)
     }
 
     return (
@@ -17,7 +17,7 @@ const TreeDropdown = () => {
                 <option value='Select a tree'>
                     -- Select a tree --
                 </option>
-                {trees.map((selectedTree) => <option value={selectedTree.intervalSpeed}>{selectedTree.type}</option>)}
+                {trees.map((selectedTree, index) => <option key={index} value={selectedTree.intervalSpeed}>{selectedTree.type}</option>)}
             </select>
         </>
     )
